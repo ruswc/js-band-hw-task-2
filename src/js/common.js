@@ -71,7 +71,6 @@ function getTruckListPromise() {
     return new Promise(((resolve, reject) => {
 
 
-
     }))
 }
 
