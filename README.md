@@ -1,6 +1,6 @@
 # ciklum
 
-##JS Band Internship
+## JS Band Internship
 
 ### js-band-hw-task-2
 
