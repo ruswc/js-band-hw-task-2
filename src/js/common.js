@@ -39,9 +39,8 @@ function getTruckById(id) {
 // callback(list, err)
 // list - list of trucks
 function getTruckListCallback(callback) {
-    let idList = callback();
     const truckList = [];
-
+    let idList = callback();
     idList.then(
         result => {
             return result.forEach(el => {
@@ -64,15 +63,42 @@ function getTruckListCallback(callback) {
     return truckList;
 }
 
+console.log(`%c getTruckListCallback: `, 'color:purple;font-size:14px');
 console.log(getTruckListCallback(getTruckIds));
 
 
 function getTruckListPromise() {
     return new Promise(((resolve, reject) => {
+        var listOfTrucks = [];
+        getTruckIds()
+            .then(
+                listOfId => listOfId.forEach(id => {
+                    getTruckById(id)
+                        .then(x => (listOfTrucks.push(x)))
+                        .catch(() => {
+                            getTruckById(id)
+                                .then(x => listOfTrucks.push(x))
+                                .catch(y => console.log(y, `Truck with id: ${id} is not available`))
+                        })
+                })
+            );
 
+        // doesn't work. Array always has length 0
+        /*if (listOfTrucks.length === 0) {
+            reject('Something went wrong. No data was received');
+        }
+        else {
+            resolve(listOfTrucks);
+        }*/
 
+        resolve(listOfTrucks);
     }))
 }
+
+console.log(`%c getTruckListPromise: `, 'color:Magenta;font-size:14px');
+getTruckListPromise()
+    .then(x => console.log(x))
+    .catch(y => console.log(`%c ${y}`, 'color:crimson'));
 
 async function getTruckListAsynAwait() {
 // ...
