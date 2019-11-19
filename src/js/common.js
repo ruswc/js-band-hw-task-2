@@ -101,6 +101,8 @@ getTruckListPromise()
     .catch(y => console.log(`%c ${y}`, 'color:crimson'));
 
 async function getTruckListAsynAwait() {
+
     // ...
+
 }
 
