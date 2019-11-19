@@ -83,7 +83,7 @@ function getTruckListPromise() {
                 })
             );
 
-        // doesn't work. Array always has length 0
+        // doesn't work in dev (Array always has length 0),
         /*if (listOfTrucks.length === 0) {
             reject('Something went wrong. No data was received');
         }
@@ -91,6 +91,7 @@ function getTruckListPromise() {
             resolve(listOfTrucks);
         }*/
 
+        // works
         resolve(listOfTrucks);
     }))
 }

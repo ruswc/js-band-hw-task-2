@@ -15,3 +15,5 @@ Acceptance criteria:
 - getTruckListAsyncAwait (use async, await) should be implemented
 - Methods should try to get document again if received error, but no more than two times
 if the error happens more than two times, the method should skip this truck
+
+test
