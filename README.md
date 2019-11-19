@@ -16,4 +16,15 @@ Acceptance criteria:
 - Methods should try to get document again if received error, but no more than two times
 if the error happens more than two times, the method should skip this truck
 
-test
+## How to view ##
+
+1. Go to https://ruswc.github.io/js-band-hw-task-2/public/index.html
+2. Open dev tool
+3. Watch the result
+
+## Development ##
+
+1. For development run the command: _npm run dev_
+2. The source of the code is in the file _./src/js/common.js_
+
+
