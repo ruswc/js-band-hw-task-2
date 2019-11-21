@@ -63,6 +63,7 @@ function getTruckListCallback(callback) {
     return truckList;
 }
 
+// test the function
 console.log(`%c getTruckListCallback: `, 'color:purple;font-size:14px');
 console.log(getTruckListCallback(getTruckIds));
 
@@ -78,32 +79,44 @@ function getTruckListPromise() {
                         .catch(() => {
                             getTruckById(id)
                                 .then(x => listOfTrucks.push(x))
-                                .catch(y => console.log(y, `Truck with id: ${id} is not available`))
+                                .catch(y => y)
+                            // .catch(y => console.log(y, `Truck with id: ${id} is not available`))
                         })
                 })
             );
 
-        // doesn't work in dev (Array always has length 0),
-        /*if (listOfTrucks.length === 0) {
-            reject('Something went wrong. No data was received');
-        }
-        else {
-            resolve(listOfTrucks);
-        }*/
-
-        // works
         resolve(listOfTrucks);
     }))
 }
 
+// test the function
 console.log(`%c getTruckListPromise: `, 'color:Magenta;font-size:14px');
 getTruckListPromise()
     .then(x => console.log(x))
     .catch(y => console.log(`%c ${y}`, 'color:crimson'));
 
-async function getTruckListAsynAwait() {
 
-    // ...
+async function getTruckListAsyncAwait() {
 
+    const idList = await getTruckIds();
+    const result = [];
+
+    idList.forEach(id => {
+            getTruckById(id)
+                .then(x => result.push(x))
+                .catch(() => getTruckById(id)
+                    .then(y => result.push(y))
+                    .catch(() => result.push(`Truck with id: ${id} is not available`))
+                )
+        }
+    )
+    return result;
 }
 
+// test the function
+getTruckListAsyncAwait()
+    .then(x => {
+        console.log(`%c getTruckListAsyncAwait: `, 'color:MediumAquamarine;font-size:14px');
+        console.log(x);
+    })
+    .catch(console.log);
